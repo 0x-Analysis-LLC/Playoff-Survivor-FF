@@ -1,0 +1,64 @@
+-- CreateTable
+CREATE TABLE "Team" (
+    "id" SERIAL NOT NULL,
+    "teamName" TEXT NOT NULL,
+    "totalPointsScored" DOUBLE PRECISION NOT NULL,
+    "roundScores" JSONB NOT NULL,
+    "userId" INTEGER NOT NULL,
+
+    CONSTRAINT "Team_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Player" (
+    "playerID" SERIAL NOT NULL,
+    "playerName" TEXT NOT NULL,
+    "position" TEXT NOT NULL,
+    "team" TEXT NOT NULL,
+    "gameInfo" TEXT NOT NULL,
+    "gameTime" TEXT NOT NULL,
+    "pointsScored" DOUBLE PRECISION NOT NULL,
+    "pastScores" JSONB NOT NULL,
+    "teamSeed" INTEGER NOT NULL,
+    "drafted" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "Player_pkey" PRIMARY KEY ("playerID")
+);
+
+-- CreateTable
+CREATE TABLE "Stats" (
+    "id" SERIAL NOT NULL,
+    "playerID" INTEGER NOT NULL,
+    "passYards" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "passTDs" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "interceptions" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "rushYards" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "rushTDs" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "fumbles" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "receptions" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "recYards" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "recTDs" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "returnTDs" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "twoPtConversions" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "totalPoints" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "sacks" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "defensiveFumbles" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "defensiveInterceptions" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "pointsAllowed" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "fieldGoals_0_39" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "fieldGoals_40_49" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "fieldGoals_50_plus" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "missedFieldGoals" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "missedXPs" DOUBLE PRECISION NOT NULL DEFAULT 0,
+
+    CONSTRAINT "Stats_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Stats_playerID_key" ON "Stats"("playerID");
+
+-- AddForeignKey
+ALTER TABLE "Team" ADD CONSTRAINT "Team_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Stats" ADD CONSTRAINT "Stats_playerID_fkey" FOREIGN KEY ("playerID") REFERENCES "Player"("playerID") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -15,4 +15,60 @@ model User {
   email String @unique
   password String
   username String
+  teams     Team[] // Reference to Team Structure
+}
+
+model Team {
+  id               Int      @id @default(autoincrement())
+  teamName         String
+  totalPointsScored Float
+  roundScores      Json     // Object with scores for each round
+  userId           Int      // Foreign key reference to User model
+  User             User     @relation(fields: [userId], references: [id])
+}
+
+model Player {
+  playerID      Int     @id @default(autoincrement())
+  playerName    String
+  position      String
+  team          String
+  gameInfo      String
+  gameTime      String
+  pointsScored  Float
+  pastScores    Json    // Array of scores for different rounds
+  teamSeed      Int
+  drafted       Boolean @default(false)
+  Stats         Stats?    // Reference to Stats Structure
+}
+
+
+
+
+model Stats {
+  id             Int     @id @default(autoincrement())
+  playerID       Int     @unique
+  passYards      Float   @default(0)
+  passTDs        Float   @default(0)
+  interceptions  Float   @default(0)
+  rushYards      Float   @default(0)
+  rushTDs        Float   @default(0)
+  fumbles        Float   @default(0)
+  receptions     Float   @default(0)
+  recYards       Float   @default(0)
+  recTDs         Float   @default(0)
+  returnTDs      Float   @default(0)
+  twoPtConversions Float @default(0)
+  totalPoints    Float   @default(0)
+  sacks          Float   @default(0)
+  defensiveFumbles Float @default(0)
+  defensiveInterceptions Float @default(0)
+  pointsAllowed  Float   @default(0)
+  fieldGoals_0_39 Float  @default(0)
+  fieldGoals_40_49 Float @default(0)
+  fieldGoals_50_plus Float @default(0)
+  missedFieldGoals Float @default(0)
+  missedXPs       Float   @default(0)
+
+  // Relations
+  Player         Player @relation(fields: [playerID], references: [playerID])
 }
