@@ -9,15 +9,13 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination"
-  import { usePathname } from "next/navigation";
 
-  export default async function Positionation(){
-    const pathname = usePathname();
-    const currentPosition = pathname.split('/').pop();
+
+  export default async function Positionation({currentPosition}: {currentPosition: string}){
 
     return(
      <Pagination>
-        <PaginationContent>
+        <PaginationContent className = "text-muted-foreground">
             <PaginationItem>
             <PaginationLink href="/team/draft/qb" isActive={currentPosition === 'qb'}>QB</PaginationLink>
             </PaginationItem>

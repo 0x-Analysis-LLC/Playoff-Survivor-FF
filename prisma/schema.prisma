@@ -5,10 +5,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
 
 model User {
   id Int @id @default(autoincrement())
@@ -17,6 +20,8 @@ model User {
   username String
   teams     Team[] // Reference to Team Structure
 }
+
+
 
 model Team {
   id               Int      @id @default(autoincrement())
@@ -27,48 +32,62 @@ model Team {
   User             User     @relation(fields: [userId], references: [id])
 }
 
+
+
 model Player {
-  playerID      Int     @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   playerName    String
   position      String
-  team          String
-  gameInfo      String
-  gameTime      String
-  pointsScored  Float
-  pastScores    Json    // Array of scores for different rounds
-  teamSeed      Int
+  teamId        Int
+  pointsScored  Float  @default(0.0)
+  pastScores    Json   @default("{\"wildcard\": 0, \"divisional\": 0, \"conference\": 0, \"superbowl\": 0}")// Array of scores for different rounds
   drafted       Boolean @default(false)
   Stats         Stats?    // Reference to Stats Structure
+  team          NflTeam @relation(fields: [teamId], references: [id])
 }
-
 
 
 
 model Stats {
   id             Int     @id @default(autoincrement())
   playerID       Int     @unique
-  passYards      Float   @default(0)
-  passTDs        Float   @default(0)
-  interceptions  Float   @default(0)
-  rushYards      Float   @default(0)
-  rushTDs        Float   @default(0)
-  fumbles        Float   @default(0)
-  receptions     Float   @default(0)
-  recYards       Float   @default(0)
-  recTDs         Float   @default(0)
-  returnTDs      Float   @default(0)
-  twoPtConversions Float @default(0)
-  totalPoints    Float   @default(0)
-  sacks          Float   @default(0)
-  defensiveFumbles Float @default(0)
-  defensiveInterceptions Float @default(0)
-  pointsAllowed  Float   @default(0)
-  fieldGoals_0_39 Float  @default(0)
-  fieldGoals_40_49 Float @default(0)
-  fieldGoals_50_plus Float @default(0)
-  missedFieldGoals Float @default(0)
-  missedXPs       Float   @default(0)
+  passYards      Float   @default(0.0)
+  passTDs        Int     @default(0)
+  interceptions  Int     @default(0)
+  rushYards      Float   @default(0.0)
+  rushTDs        Int     @default(0)
+  fumbles        Int     @default(0)
+  receptions     Int     @default(0)
+  recYards       Float   @default(0.0)
+  recTDs         Int     @default(0)
+  returnTDs      Int     @default(0)
+  twoPtConv      Int     @default(0)
+  totalPoints    Float   @default(0.0)
+  sacks          Float   @default(0.0)
+  defFumbles     Int     @default(0)
+  defInt         Int     @default(0)
+  pointsAllowed  Int     @default(0)
+  FGs_0_39       Int     @default(0)
+  FGs_40_49      Int     @default(0)
+  FGs_50_plus    Int     @default(0)
+  missedFGs      Int     @default(0)
+  missedXPs      Int     @default(0)
 
   // Relations
-  Player         Player @relation(fields: [playerID], references: [playerID])
+  Player         Player @relation(fields: [playerID], references: [id])
+}
+
+
+
+model NflTeam {
+  id        Int      @id @default(autoincrement())
+  name      String
+  shortName String
+  nameCode  String
+  US_FB_ID  Int     @unique
+  gameInfo  String  @default("TBD")
+  gameTime  String  @default("TBD")
+  seed      Int
+  eliminated Boolean @default(false)
+  players   Player[]
 }

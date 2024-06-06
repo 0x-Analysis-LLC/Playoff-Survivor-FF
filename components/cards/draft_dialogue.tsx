@@ -55,12 +55,12 @@ import {
                         </ul>
                     </div>
                     <div className="mb-4">
-                    <DialogTitle>Editing Your Team</DialogTitle>
-                    <p className="mt-4">After drafting and before the NFL playoffs begin, you can always come back here to edit your roster; 
-                    Re-Enter the draft portal, and you'll have the ability to drop or add players. 
-                    Don't worry your roster won't reset and you won't need to redraft. It's just a temporary solution for roster editing. 
-                    Goodluck and hope you enjoy ! 😁 
-                    </p>
+                    <DialogTitle className="my-4">Draft Process</DialogTitle>
+                    <ul className="list-disc list-inside ms-4 my-4">
+                            <li>You'll draft by position starting with QB, feel free to go in whatever order you'd like. Your roster is located on the left hand side of the next screen.</li>
+                            <li>To edit your roster before the playoffs start you'll need to re-enter the draft and draft again.  Your previous roster will still be in place and you'll be prompted to drop players when trying to draft a position that is already full.</li>
+                            <li>If you have any questions please <a href='mailto:nathanfitz6@gmail.com' className="text-indigo-200 hover:underline">email me</a> or contact Jay.</li>
+                        </ul>
                     </div>
                 </div>
                 <DialogFooter>

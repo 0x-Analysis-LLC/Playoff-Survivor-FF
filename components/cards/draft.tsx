@@ -32,33 +32,6 @@ export default function Team(){
 
                 </ResizablePanel>
             </ResizablePanelGroup>
-            {/* <div className="flex flex-row">
-                    <div className="me-4 text-muted-foreground">
-                        <p>RB</p>
-                    </div>
-                    <div>
-                        <p>Travis Etienne Jr.</p>
-                    </div>
-                </div>
-                <div className="flex-1">
-                    <Button className="rounded-3xl">MOVE</Button>
-                </div>
-                <Separator orientation="vertical" />
-                <div className="hidden md:flex flex-row">
-                    <div className="mx-2">
-                        <p>@NYG</p>
-                    </div>
-                    <div>
-                        <p>Sat 1:00 pm</p>
-                    </div>
-                </div>
-                <div className="flex-1">
-                    <p>59.7</p>
-                </div>
-                <Separator orientation = "vertical" className="hidden md:block" />
-                <div className="flex-1 hidden md:block">
-                    <p>Past Scores</p>
-                </div> */}
             </CardContent>
             <CardFooter className="justify-center">
                 <p>0x Analysis</p>

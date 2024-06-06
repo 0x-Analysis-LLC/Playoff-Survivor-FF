@@ -1,7 +1,9 @@
 import Navbar from "@/components/menus/navbar"
 import DropdownMenu from "@/components/menus/dropdown"
 import MobileMenu from "@/components/menus/mobilemenu"
-import Draft from "@/components/cards/draft"
+import DraftWindow from "@/components/cards/draft_window"
+import DraftRoster from "@/components/cards/draft_roster"
+
 
 
 
@@ -18,7 +20,8 @@ export default function TeamPage({ params }: { params: { round: string } }){
                 <MobileMenu />
             </div>
             <div className="flex flex-grow md:m-6 justify-center items-center">
-                <Draft />
+                <DraftRoster />
+                <DraftWindow />
             </div>
         </div>
     )

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "NFLTeam" ALTER COLUMN "gameInfo" SET DEFAULT 'TBD',
+ALTER COLUMN "gameTime" SET DEFAULT 'TBD';
